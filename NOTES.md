@@ -120,7 +120,7 @@
 
 # internet / network layers
 
-  UDP of this unit is a PACKET
+  PDU of this unit is a PACKET
     - header + (TCP seg | UDP datagram)
     - header:
       IP version
@@ -308,5 +308,39 @@
 # Servers
 
   - Web server
+    handles requests for static assets that dont require processing
+
   - Application server
+    where server-side code lives and where more complex requests are handled
+
   - Data store
+    some kind of database
+    could be key-value pairs, files, documents, etc
+
+
+# Requests and Responses
+
+  client generally refers to the web browser
+  server generally refers to the software running on the machine
+  not hardware!
+
+  Request anatomy:
+    start line or request line
+      method (get post, etc)
+      path /folder/folder
+      parameters ?a=1&b=poop `OPTIONAL`
+    headers
+      host is required in 1.1
+      `OPTIONAL`
+    body `OPTIONAL`
+
+  server:
+    verify session
+    load tasks from database
+    render html
+
+  Response anatomy:
+    status (200, 300, 400, 500, etc)
+    headers `OPTIONAL`
+      content-type
+    body (html or whatever) `OPTIONAL`

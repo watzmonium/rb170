@@ -142,4 +142,63 @@
       santize inputs
       escape all special characters
 
+# TLS
+
+  Transport Layer Security (there is also DTLS for UDP)
+  Used to be called SSL but also people still call it SSL
+  Most recent version is 1.3
+
+  3 Primary services
+    1) encryption
+    2) authentication - verification of identity
+    3) integrity - determine if message has been interfered with or faked
+
+  Encryption:
+    happens via TLS handshake
+    similar to vignere cipher
+    issue is how do send the key to other party without it being public?
+
+  Asymmetric Key Encryption
+    AKA public key encryption
+    pair of keys - public and private
+    public encrypts - private decrypts
+    only works in one direction
+
+  TLS handshake
+    We need a symmetric key for end-end encryption
+    initial symmetric key is sent via asymmetric key encryption
+    happens AFTER the TCP handshake to establish a connection
+    steps:
+      1) client sends clienthello message that says the max version of TLS client supports
+      2) server responds with serverhello message that sets the protocol and version of CipherSuite in addition to its certificate that has its public key and a ServerHelloDone message saying it's done
+      3) client then initiates key exchange process that allows both parties to get the symmetric encryption key
+      4) server does some voodoo and then sends ChangeCipherSpec and finished messages so they start using the encyrption
+
+    kind of exists between HTTP and TCP protocols and in the `session` OSI layer
+      PDU has a MAC field, but it's NOT MAC address, it's message authentication code
+        MAC is like a checksum using a hashing algorithm
     
+# Certificates/Authentication
+
+  Certificates:
+    the server sends its cert that has its public key
+    and some data encrypted with its private key (signature)
+      the signature comes with the original data from which it was created
+    if the data and encryption match, the party MUST hold the private key
+
+    certificate authorities authenticate parties
+
+# APIs to know
+
+  - XHR  (XML HTTP Request)
+    XML is a markup language but you don't need to know how to use it because
+    XHR can use JSON, HTML, or plaintext
+    This allows you to see something before a server update
+    XHR is a jey combonent in AJAX
+
+  - SSE (server side events)
+    keeps TCP connection open to send text
+
+  - Websocket
+
+
